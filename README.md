@@ -8,8 +8,7 @@ My dot files as well as a variety of scripts to manipulate/use them. These work 
   - `lsd`: Better `ls` command, uses Nerdfont icons
 
 ### Tmux
-- `tmux.conf`: Standard tmux.conf file.
-- `install_tmux.sh`: Will install tmux dependencies and copy the tmux.conf file over.
+- `tmux.conf`: Standard tmux.conf file. Will automatically download plugin manager on first install
 - Tmux plugins: (coming soon)
 
 
