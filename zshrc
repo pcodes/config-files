@@ -18,7 +18,6 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 
 # Tmux Settings
 ZSH_TMUX_AUTOSTART=true
-#ZSH_TMUX_ITERM2=true
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -48,6 +47,9 @@ ZSH_TMUX_AUTOSTART=true
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
+# Additional completions
+source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
+
 # Key Bindings
 bindkey '^ ' autosuggest-accept
 
@@ -75,7 +77,13 @@ bindkey '^ ' autosuggest-accept
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast git-extras osx pip ssh-agent sudo tmux brew chucknorris common-aliases copyfile rust zsh-autosuggestions)
+plugins=(git gitfast git-extras pip ssh-agent sudo tmux chucknorris common-aliases copyfile rust zsh-autosuggestions)
+
+if [[ "$OSTYPE" =~ "darwin" ]]; then
+        plugins+=(brew osx)
+else
+        plugins+=(debian systemd)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
