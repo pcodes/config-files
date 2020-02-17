@@ -35,18 +35,27 @@ Plugin 'ryanoasis/vim-devicons'
 
 " END PLUGINS
 call vundle#end()            
-filetype plugin indent on
 
-" VISUALS
-colorscheme gruvbox
-set background=dark
+" Base Vim settings
+filetype plugin indent on
 syntax on
-let g:airline_theme='jellybeans'
-set number "Show line numbers
-set noshowmode "Hide the second mode (airline already has it)
-set laststatus=2 "Always show statusline
-let g:airline_powerline_fonts = 1 "Enable powerline fonts
 set encoding=UTF-8
+set laststatus=2 "Always show statusline
+set noshowmode "Hide the second mode (airline already has it)
+set number "Show line numbers
+
+" Enable TrueColor
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+" Colorscheme
+colorscheme gruvbox
+let g:gruvbox_italic=1
+set background=dark
+
+let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts = 1 "Enable powerline fonts
 
 " TAB PAGES
 map <F6> :tabn<CR>
@@ -60,7 +69,6 @@ set tabstop=4 expandtab
 " NERDTREE SETTINGS
 map <F2> :NERDTreeToggle<CR>
 
-" Fix SQL Bug
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:python_highlight_all = 1
 
