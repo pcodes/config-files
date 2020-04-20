@@ -8,8 +8,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 " Themes for a sweet status bar
 Plug 'vim-airline/vim-airline-themes'
-" Vim colorscheme
+" Material colorscheme
 Plug 'kaicataldo/material.vim'
+" Onedark colorscheme
+Plug 'joshdick/onedark.vim'
 " Tmux status line generator
 Plug 'edkolev/tmuxline.vim'
 "Smooth scrolling

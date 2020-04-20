@@ -11,6 +11,10 @@ My dot files as well as a variety of scripts to manipulate/use them. These work 
 - `tmux.conf`: Standard tmux.conf file. Will automatically download plugin manager on first install
 - Tmux plugins: (coming soon)
 
+### Neovim
+I upgraded from Vim 8 to using Neovim. I overhauled my plugin selection and things should be much snappier.
+The base file is `neovim.vim` in the `config` directory.
+There also is `coc-settings.json` for modifying the `coc` auto-complete plugin.
 
 ### Other Scripts
 - `update_config.sh`: If you want to update any of the config files, change them in here. Changes are then tracked with VCS, and the script copies the new one.
