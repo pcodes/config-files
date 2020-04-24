@@ -142,6 +142,7 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
+let g:airline#extensions#coc#enabled = 1
 "--------------------------------
 " Go Settings
 "--------------------------------
@@ -156,6 +157,8 @@ let g:go_highlight_types = 1
 let g:go_highlight_function_parameters = 1
 let g:go_highlight_function_calls = 1
 let g:go_auto_sameids = 1
+
+let g:go_fmt_command = "goimports"
 
 "--------------------------------
 " FZF Settings
