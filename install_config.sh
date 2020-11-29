@@ -8,6 +8,9 @@ for i in "${!FILES[@]}"; do
         ln -sf $SCRIPTPATH/config/${FILES[$i]} ~/.${FILES[$i]}
 done
 
+# Create config directory
+mkdir -p $HOME/.config/nvim
+
 # Install neovim specific files
 ln -sf $SCRIPTPATH/config/neovim.vim ~/.config/nvim/init.vim
 ln -sf $SCRIPTPATH/config/coc-settings.json ~/.config/nvim/coc-settings.json

@@ -36,12 +36,6 @@ Plug 'honza/vim-snippets'
 " Auto-close those brackets
 Plug 'jiangmiao/auto-pairs'
 
-" ---Language plugins---
-" Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Python
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-
 " ---Misc---
 " Better commenting
 Plug 'preservim/nerdcommenter'
@@ -52,7 +46,6 @@ Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 "--------------------------------
-"
 " General Vim Settings
 "--------------------------------
 set autoindent
@@ -134,31 +127,41 @@ map <F4> :tabp<CR>
 map <F3> :vsplit<CR>
 
 "--------------------------------
-" COC Auto-complete Settings
+" CoC Settings
 "--------------------------------
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-sh', 'coc-markdownlint']
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 let g:airline#extensions#coc#enabled = 1
-"--------------------------------
-" Go Settings
-"--------------------------------
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 1
-let g:go_auto_sameids = 1
-
-let g:go_fmt_command = "goimports"
 
 "--------------------------------
 " FZF Settings
