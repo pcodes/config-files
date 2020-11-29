@@ -20,7 +20,7 @@ ZSH_TMUX_AUTOSTART=true
 bindkey '^ ' autosuggest-accept
 
 # Plugins
-plugins=(git pip ssh-agent sudo tmux chucknorris common-aliases zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git pip ssh-agent sudo tmux chucknorris common-aliases zsh-autosuggestions zsh-syntax-highlighting docker docker-compose)
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
         plugins+=(brew osx)

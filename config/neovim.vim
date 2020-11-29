@@ -129,7 +129,7 @@ map <F3> :vsplit<CR>
 "--------------------------------
 " CoC Settings
 "--------------------------------
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-sh', 'coc-markdownlint']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-sh', 'coc-markdownlint', 'coc-yaml']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
