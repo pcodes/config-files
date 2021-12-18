@@ -1,34 +1,19 @@
-#!/bin/bash
+setup_repos() {
+	# Github CLI
+	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 
-SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-PACKAGES=(tmux zsh nodejs gcc g++ make)
+	# Docker
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+ echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-run_config_scripts() {
-    # Install ZSH
-    echo "Installing ZSH..."
-    sh -c './install_zsh.sh'
-
-    # Install neovim
-    echo "Installing Neovim..."
-    sh -c './install_neovim.sh'
-
-    # Install config files
-    echo "Installing config files..."
-    sh -c './install_config.sh'
-}
-
-add_sources() {
-    # Add NodeJS source
-    curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+ sudo apt update
 }
 
 install_packages() {
-    sudo apt update
-    for i in "${PACKAGES[@]}"
-    do
-        echo "Installing $i..."
-        sudo apt-get install -y $i
-    done
+	PACKAGES = (zsh tmux ca-certificates curl gnupg lsb-release neofetch gh docker-ce docker-ce-cli containerd.io)
 }
 
-install_packages
+setup_repos
