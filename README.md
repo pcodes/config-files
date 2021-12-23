@@ -3,6 +3,11 @@ My dot files as well as a variety of scripts to manipulate/use them. These work 
 
 ### ZSH
 - `zshrc`: My ZSHRC file. It uses Oh My ZSH as well as a variety of shell plugins for enhanced functionality
+- Oh My ZSH Custom Plugins:
+  - ZSH Autocomplete
+  - ZSH Syntax Highlighting
+  - Custom Plugin Autoupdate
+  - Powerlevel10k theme
 - `install_zsh.sh`: This will download and install Oh my ZSH (ZSH framework), PowerLevel10K (my theme of choice), and the following dependencies:
   - `diff-so-fancy`: Better diff viewing
   - `lsd`: Better `ls` command, uses Nerdfont icons
@@ -15,6 +20,10 @@ My dot files as well as a variety of scripts to manipulate/use them. These work 
 I upgraded from Vim 8 to using Neovim. I overhauled my plugin selection and things should be much snappier.
 The base file is `neovim.vim` in the `config` directory.
 There also is `coc-settings.json` for modifying the `coc` auto-complete plugin.
+
+## Linters + Formatters
+- Lua: LuaFormatter
+- Bash: Shellcheck + Bashfmt
 
 ### Other Scripts
 - `update_config.sh`: If you want to update any of the config files, change them in here. Changes are then tracked with VCS, and the script copies the new one.
