@@ -37,6 +37,11 @@ if type "nvim" >/dev/null; then
     HAS_NVIM=true
 fi
 
+# Check if lsd is installed
+if type "lsd" >/dev/null; then
+    HAS_LSD=true
+fi
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
@@ -59,6 +64,14 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 if [[ ! -z $HAS_NVIM ]]; then
     alias vim="nvim"
+fi
+
+if [[ -n $HAS_LSD ]]; then
+    alias ls="lsd"
+    alias l='ls -l'
+    alias la='ls -a'
+    alias lla='ls -la'
+    alias lt='ls --tree'
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
