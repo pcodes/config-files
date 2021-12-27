@@ -1,51 +1,114 @@
 #!/bin/bash
 
 SCRIPTPATH="$(
-	cd "$(dirname "$0")" >/dev/null 2>&1 || exit
-	pwd -P
+    cd "$(dirname "$0")" >/dev/null 2>&1 || exit
+    pwd -P
 )"
 # Files that sit in the home dir
 HOME_DIR_FILES=("tmux.conf" "gitconfig" "zshrc")
 
 function install_oh_my_zsh() {
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 function install_custom_zsh_plugins() {
-	git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins "$ZSH_CUSTOM"/plugins/autoupdate
-	git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins "$ZSH_CUSTOM"/plugins/autoupdate
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 }
 
 function install_zsh_theme() {
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/themes/powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/themes/powerlevel10k
 }
 
 function create_other_symlinks() {
-	for i in "${!HOME_DIR_FILES[@]}"; do
-		echo "Copying " + "${HOME_DIR_FILES[$i]}"
-		ln -sf "$SCRIPTPATH"/config/"${HOME_DIR_FILES[$i]}" ~/."${HOME_DIR_FILES[$i]}"
-	done
+    for i in "${!HOME_DIR_FILES[@]}"; do
+        echo "Copying " + "${HOME_DIR_FILES[$i]}"
+        ln -sf "$SCRIPTPATH"/config/"${HOME_DIR_FILES[$i]}" ~/."${HOME_DIR_FILES[$i]}"
+    done
 }
 
 function create_nvim_symlinks() {
-	mkdir -p "$HOME"/.config/nvim/lua
-	LUA_FILES=($(ls "$SCRIPTPATH"/config/nvim/lua))
+    mkdir -p "$HOME"/.config/nvim/lua
+    LUA_FILES=($(ls "$SCRIPTPATH"/config/nvim/lua))
 
-	ln -sf "$SCRIPTPATH"/config/nvim/init.lua ~/.config/nvim/init.lua
+    ln -sf "$SCRIPTPATH"/config/nvim/init.lua ~/.config/nvim/init.lua
 
-	for i in "${!LUA_FILES[@]}"; do
-		echo "Copying " + "${LUA_FILES[$i]}"
-		ln -sf "$SCRIPTPATH"/config/nvim/lua/"${LUA_FILES[$i]}" ~/.config/nvim/lua/"${LUA_FILES[$i]}"
-	done
+    for i in "${!LUA_FILES[@]}"; do
+        echo "Copying " + "${LUA_FILES[$i]}"
+        ln -sf "$SCRIPTPATH"/config/nvim/lua/"${LUA_FILES[$i]}" ~/.config/nvim/lua/"${LUA_FILES[$i]}"
+    done
 
 }
 
-# Create config directory
-#mkdir -p $HOME/.config/nvim
+function helptext() {
+    echo "Script to install dependencies and create symlinks for config files."
+    echo "USAGE: ./install_config.sh ARGS"
+    echo "Arguments:"
+    echo -e "--ohmy\t\tInstall Oh my ZSH"
+    echo -e "--custom\t\tInstall Oh My Zsh custom plugins"
+    echo -e "--theme\t\tInstall ZSH theme"
+    echo -e "--other_symlinks\t\tCreate symlinks for non-nvim configs"
+    echo -e "--nvim_symlinks\t\tCreate symlinks for all nvim configs"
+}
 
-# Install neovim specific files
-#ln -sf $SCRIPTPATH/config/neovim.vim ~/.config/nvim/init.vim
-#ln -sf $SCRIPTPATH/config/coc-settings.json ~/.config/nvim/coc-settings.json
+while [[ $# -gt 0 ]]; do
+    key="$1"
 
-install_zsh_theme
+    case $key in
+    --all)
+        shift # shift past the argument
+        INSTALL_OH_MY_ZSH=true
+        INSTALL_ZSH_CUSTOM=true
+        INSTALL_ZSH_THEME=true
+        INSTALL_OTHER_SYMLINKS=true
+        INSTALL_NVIM_SYMLINKS=true
+        ;;
+    --ohmy)
+        shift
+        INSTALL_OH_MY_ZSH=true
+        ;;
+    --custom)
+        shift
+        INSTALL_ZSH_CUSTOM=true
+        ;;
+    --theme)
+        shift
+        INSTALL_ZSH_THEME=true
+        ;;
+    --other_symlinks)
+        shift
+        INSTALL_OTHER_SYMLINKS=true
+        ;;
+    --nvim_symlinks)
+        shift
+        INSTALL_NVIM_SYMLINKS=true
+        ;;
+    --help)
+        shift
+        helptext
+        exit
+        ;;
+    esac
+done
+
+if [[ -n $INSTALL_OH_MY_ZSH ]]; then
+    echo "Installing oh my zsh"
+    #install_oh_my_zsh
+fi
+
+if [[ -n $INSTALL_ZSH_CUSTOM ]]; then
+    install_custom_zsh_plugins
+fi
+
+if [[ -n $INSTALL_ZSH_THEME ]]; then
+    install_zsh_theme
+fi
+
+if [[ -n $INSTALL_OTHER_SYMLINKS ]]; then
+    create_other_symlinks
+fi
+
+if [[ -n $INSTALL_NVIM_SYMLINKS ]]; then
+    create_nvim_symlinks
+fi
