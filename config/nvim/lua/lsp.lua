@@ -31,3 +31,7 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 require'lspconfig'.bashls.setup{}
+
+require'lspconfig'.jsonls.setup{}
+
+-- require'lspconfig'.yamlls.setup{}
