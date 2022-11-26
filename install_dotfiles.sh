@@ -67,8 +67,8 @@ while [[ $# -gt 0 ]]; do
         INSTALL_OH_MY_ZSH=true
         INSTALL_ZSH_CUSTOM=true
         INSTALL_ZSH_THEME=true
-        INSTALL_OTHER_SYMLINKS=true
-        INSTALL_NVIM_SYMLINKS=true
+        INSTALL_CONFIGDIR_SYMLINKS=true
+        INSTALL_HOMEDIR_SYMLINKS=true
         ;;
     --ohmy)
         shift
