@@ -1,6 +1,14 @@
 # Config Files
 My dot files as well as a variety of scripts to manipulate/use them. These work with MacOS and Ubuntu.
 
+### Bootstrapping a new Fedora Installation
+Run this one-off command to set up the github CLI + download this repo, all in one-shot.
+Maybe eventually this will kick off the config files installer?
+
+```
+curl -s https://raw.githubusercontent.com/pcodes/config-files/master/bootstrap_linux.sh | bash
+```
+
 ### ZSH
 - `zshrc`: My ZSHRC file. It uses Oh My ZSH as well as a variety of shell plugins for enhanced functionality
 - Oh My ZSH Custom Plugins:
