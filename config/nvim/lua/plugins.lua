@@ -9,7 +9,7 @@ end
 -- I manually specify the `use` var to make the Lua LSP happy
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
-    use 'folke/tokyonight.nvim'
+    use { "catppuccin/nvim", as = "catppuccin" }
     use {
         'nvim-lualine/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
@@ -32,9 +32,12 @@ require('packer').startup(function(use)
     use "windwp/nvim-autopairs"
 end)
 
-require('lualine').setup {options = {theme = 'tokyonight'}}
+require('lualine').setup {options = {theme = 'catppuccin'}}
 
-require('nvim-treesitter.configs').setup {ensure_installed = "maintained"}
+require('nvim-treesitter.configs').setup {
+    ensure_installed = "all",
+    highlight={enable=true}
+}
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))

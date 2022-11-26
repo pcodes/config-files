@@ -34,5 +34,4 @@ vim.g.smarttab = 4
 
 -- Color scheme
 vim.o.termguicolors = true
-vim.g.tokyonight_style = "night"
-vim.cmd [[colorscheme tokyonight]]
+vim.cmd [[colorscheme catppuccin-mocha]]
