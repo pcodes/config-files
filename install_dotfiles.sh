@@ -24,19 +24,20 @@ function install_zsh_theme() {
 function create_other_symlinks() {
     for i in "${!HOME_DIR_FILES[@]}"; do
         echo "Copying " + "${HOME_DIR_FILES[$i]}"
-        ln -sf "$SCRIPTPATH"/config/"${HOME_DIR_FILES[$i]}" ~/."${HOME_DIR_FILES[$i]}"
+        ln -sf "$SCRIPTPATH"/dotfiles/"${HOME_DIR_FILES[$i]}" ~/."${HOME_DIR_FILES[$i]}"
     done
 }
 
 function create_nvim_symlinks() {
     mkdir -p "$HOME"/.config/nvim/lua
-    LUA_FILES=($(ls "$SCRIPTPATH"/config/nvim/lua))
+    LUA_FILES=($(ls "$SCRIPTPATH"/dotfiles/config/nvim/lua))
+    echo $LUA_FILES
 
-    ln -sf "$SCRIPTPATH"/config/nvim/init.lua ~/.config/nvim/init.lua
+    ln -sf "$SCRIPTPATH"/dotfiles/config/nvim/init.lua ~/.config/nvim/init.lua
 
     for i in "${!LUA_FILES[@]}"; do
         echo "Copying " + "${LUA_FILES[$i]}"
-        ln -sf "$SCRIPTPATH"/config/nvim/lua/"${LUA_FILES[$i]}" ~/.config/nvim/lua/"${LUA_FILES[$i]}"
+        ln -sf "$SCRIPTPATH"/dotfiles/config/nvim/lua/"${LUA_FILES[$i]}" ~/.config/nvim/lua/"${LUA_FILES[$i]}"
     done
 
 }
@@ -89,6 +90,9 @@ while [[ $# -gt 0 ]]; do
         helptext
         exit
         ;;
+    *)
+        echo "ERROR: $key is unrecognized"
+        exit
     esac
 done
 
