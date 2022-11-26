@@ -21,17 +21,19 @@ function install_zsh_theme() {
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/themes/powerlevel10k
 }
 
-function create_other_symlinks() {
+function create_homedir_symlinks() {
     for i in "${!HOME_DIR_FILES[@]}"; do
         echo "Copying " + "${HOME_DIR_FILES[$i]}"
         ln -sf "$SCRIPTPATH"/dotfiles/"${HOME_DIR_FILES[$i]}" ~/."${HOME_DIR_FILES[$i]}"
     done
 }
 
-function create_nvim_symlinks() {
-    mkdir -p "$HOME"/.config/nvim/lua
+function create_configdir_symlinks() {
+    mkdir -p $HOME/.config/nvim/lua
+    mkdir -p $HOME/.config/alacritty
+    mkdir -p $HOME/.config/i3
+
     LUA_FILES=($(ls "$SCRIPTPATH"/dotfiles/config/nvim/lua))
-    echo $LUA_FILES
 
     ln -sf "$SCRIPTPATH"/dotfiles/config/nvim/init.lua ~/.config/nvim/init.lua
 
@@ -39,6 +41,9 @@ function create_nvim_symlinks() {
         echo "Copying " + "${LUA_FILES[$i]}"
         ln -sf "$SCRIPTPATH"/dotfiles/config/nvim/lua/"${LUA_FILES[$i]}" ~/.config/nvim/lua/"${LUA_FILES[$i]}"
     done
+
+    ln -sf "$SCRIPTPATH"/dotfiles/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+    ln -sf "$SCRIPTPATH"/dotfiles/config/i3/config ~/.config/i3/config
 
 }
 
@@ -77,13 +82,18 @@ while [[ $# -gt 0 ]]; do
         shift
         INSTALL_ZSH_THEME=true
         ;;
-    --other_symlinks)
+    --homedir_symlinks)
         shift
-        INSTALL_OTHER_SYMLINKS=true
+        INSTALL_HOMEDIR_SYMLINKS=true
         ;;
-    --nvim_symlinks)
+    --configdir_symlinks)
         shift
-        INSTALL_NVIM_SYMLINKS=true
+        INSTALL_CONFIGDIR_SYMLINKS=true
+        ;;
+    --symlinks)
+        shift
+        INSTALL_CONFIGDIR_SYMLINKS=true
+        INSTALL_HOMEDIR_SYMLINKS=true 
         ;;
     --help)
         shift
@@ -109,10 +119,10 @@ if [[ -n $INSTALL_ZSH_THEME ]]; then
     install_zsh_theme
 fi
 
-if [[ -n $INSTALL_OTHER_SYMLINKS ]]; then
-    create_other_symlinks
+if [[ -n $INSTALL_HOMEDIR_SYMLINKS ]]; then
+    create_homedir_symlinks
 fi
 
-if [[ -n $INSTALL_NVIM_SYMLINKS ]]; then
-    create_nvim_symlinks
+if [[ -n $INSTALL_CONFIGDIR_SYMLINKS ]]; then
+    create_configdir_symlinks
 fi
