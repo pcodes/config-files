@@ -6,8 +6,8 @@ SCRIPTPATH="$(
 )"
 
 install_packages_from_manager () {
-    fedora_desktop=(alacritty polybar rofi)
-    fedora_packages=(zsh gh tmux neovim g++ curl neofetch bat lsd python3-pip nodejs-bash-language-server ranger fzf speedtest-cli go i3)
+    fedora_desktop=(alacritty i3 polybar rofi)
+    fedora_packages=(zsh gh tmux neovim g++ curl neofetch bat lsd python3-pip nodejs-bash-language-server ranger fzf speedtest-cli go)
     
     echo "Downloading core Fedora packages..."
     for i in "${fedora_packages[@]}"

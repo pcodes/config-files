@@ -9,6 +9,16 @@ Maybe eventually this will kick off the config files installer?
 curl -s https://raw.githubusercontent.com/pcodes/config-files/master/bootstrap_linux.sh | bash
 ```
 
+### TODO
+> ⚠️ WARNING: This is all under construction, everything below this section is super outdated
+Next steps:
+- Add polybar to this
+- Create actual custom polybar
+- No more manual lists in the install dotfiles script
+- Figure out rofi theme
+- Add support for creating .desktop files for things I like (such as obsidian)
+- Add support for creating the graphical target for i3 (currently it's in the .bin folder of my laptop)
+
 ### ZSH
 - `zshrc`: My ZSHRC file. It uses Oh My ZSH as well as a variety of shell plugins for enhanced functionality
 - Oh My ZSH Custom Plugins:
