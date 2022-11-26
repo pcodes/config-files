@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Downloading $1 Nerd Font..."
-wget -q -O ~/Downloads/font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/$1.zip
+wget -q -O ~/Downloads/font.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$1.zip
 mkdir ~/Downloads/font_tmp
 echo "Font downloaded, unzipping..."
 unzip -d ~/Downloads/font_tmp ~/Downloads/font.zip 
