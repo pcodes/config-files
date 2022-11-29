@@ -8,6 +8,7 @@ SCRIPTPATH="$(
 HOME_DIR_FILES=("tmux.conf" "gitconfig" "zshrc")
 
 function install_oh_my_zsh() {
+    echo "Running Oh My ZSH installer..."
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
@@ -47,6 +48,22 @@ function create_configdir_symlinks() {
 
 }
 
+function run_nvim_package_install() {
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+}
+
+function run_tmux_package_install() {
+    # start a server but don't attach to it
+    tmux start-server
+    # create a new session but don't attach to it either
+    tmux new-session -d
+    # install the plugins
+    ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+    # killing the server is not required, I guess
+    tmux kill-server
+}
+
+
 function helptext() {
     echo "Script to install dependencies and create symlinks for config files."
     echo "USAGE: ./install_config.sh ARGS"
@@ -69,6 +86,8 @@ while [[ $# -gt 0 ]]; do
         INSTALL_ZSH_THEME=true
         INSTALL_CONFIGDIR_SYMLINKS=true
         INSTALL_HOMEDIR_SYMLINKS=true
+        INSTALL_NVIM_PACKAGES=true
+        INSTALL_TMUX_PACKAGES=true
         ;;
     --ohmy)
         shift
@@ -95,6 +114,11 @@ while [[ $# -gt 0 ]]; do
         INSTALL_CONFIGDIR_SYMLINKS=true
         INSTALL_HOMEDIR_SYMLINKS=true 
         ;;
+    --packager_manager_run)
+        shift
+        INSTALL_NVIM_PACKAGES=true
+        INSTALL_TMUX_PACKAGES=true
+        ;;
     --help)
         shift
         helptext
@@ -106,9 +130,17 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+
+if [[ -n $INSTALL_HOMEDIR_SYMLINKS ]]; then
+    create_homedir_symlinks
+fi
+
+if [[ -n $INSTALL_CONFIGDIR_SYMLINKS ]]; then
+    create_configdir_symlinks
+fi
+
 if [[ -n $INSTALL_OH_MY_ZSH ]]; then
-    echo "Installing oh my zsh"
-    #install_oh_my_zsh
+    install_oh_my_zsh
 fi
 
 if [[ -n $INSTALL_ZSH_CUSTOM ]]; then
@@ -119,10 +151,10 @@ if [[ -n $INSTALL_ZSH_THEME ]]; then
     install_zsh_theme
 fi
 
-if [[ -n $INSTALL_HOMEDIR_SYMLINKS ]]; then
-    create_homedir_symlinks
+if [[ -n $INSTALL_NVIM_PACKAGES ]]; then
+    run_nvim_package_install
 fi
 
-if [[ -n $INSTALL_CONFIGDIR_SYMLINKS ]]; then
-    create_configdir_symlinks
+if [[ -n $INSTALL_TMUX_PACKAGES ]]; then
+    run_tmux_package_install
 fi
