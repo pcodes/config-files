@@ -130,15 +130,6 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-
-if [[ -n $INSTALL_HOMEDIR_SYMLINKS ]]; then
-    create_homedir_symlinks
-fi
-
-if [[ -n $INSTALL_CONFIGDIR_SYMLINKS ]]; then
-    create_configdir_symlinks
-fi
-
 if [[ -n $INSTALL_OH_MY_ZSH ]]; then
     install_oh_my_zsh
 fi
@@ -149,6 +140,14 @@ fi
 
 if [[ -n $INSTALL_ZSH_THEME ]]; then
     install_zsh_theme
+fi
+
+if [[ -n $INSTALL_HOMEDIR_SYMLINKS ]]; then
+    create_homedir_symlinks
+fi
+
+if [[ -n $INSTALL_CONFIGDIR_SYMLINKS ]]; then
+    create_configdir_symlinks
 fi
 
 if [[ -n $INSTALL_NVIM_PACKAGES ]]; then

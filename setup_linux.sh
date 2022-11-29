@@ -131,16 +131,16 @@ if [[ -n $INSTALL_PACKAGES ]]; then
     fi
 fi
 
-if [[ -n $DOTFILES ]]; then
-    install_dotfiles
+if [[ -n $CHANGE_SHELL ]]; then
+    change_shell
 fi
 
 if [[ -n $INSTALL_PIP_PACKAGES ]]; then
     install_pip_packages
 fi
 
-if [[ -n $CHANGE_SHELL ]]; then
-    change_shell
+if [[ -n $DOTFILES ]]; then
+    install_dotfiles
 fi
 
 if [[ -n $ALACRITTY_THEME ]]; then
@@ -149,8 +149,4 @@ fi
 
 if [[ -n $NERDFONT ]]; then
     install_nerdfont
-fi
-
-if [[ -n $INSTALL_TMUX_PACKAGES ]]; then
-    run_tmux_package_install
 fi
