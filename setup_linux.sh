@@ -17,10 +17,11 @@ function install_dotfiles() {
 function install_alacritty_theme() {
     echo "Downloading catppuccin Alacritty theme..."
     mkdir -p $HOME/.config/alacritty
+    git clone https://github.com/catppuccin/alacritty.git ~/.config/alacritty/catppuccin
 }
 
 function install_packages_from_manager () {
-    fedora_desktop=(alacritty i3 polybar rofi)
+    fedora_desktop=(alacritty i3 polybar rofi picom)
     fedora_packages=(zsh gh tmux neovim g++ curl neofetch bat lsd python3-pip nodejs-bash-language-server ranger fzf speedtest-cli go)
     
     echo "Downloading core Fedora packages..."
