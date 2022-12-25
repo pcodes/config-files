@@ -30,6 +30,8 @@ require('packer').startup(function(use)
     }
     use "folke/which-key.nvim"
     use "windwp/nvim-autopairs"
+    use 'ray-x/go.nvim'
+    use 'ray-x/guihua.lua' -- recommanded if need floating window support
 end)
 
 require('lualine').setup {options = {theme = 'catppuccin'}}
@@ -109,5 +111,8 @@ cmp.setup {
 
 cmp.event:on('confirm_done',
              cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))
+
+
+require('go').setup()
 
 require("which-key").setup {}

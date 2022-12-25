@@ -37,7 +37,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # Set initial delay 300ms,
-exec --no-startup-id xset r rate 300 35
+exec --no-startup-id xset r rate 200 35
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
@@ -187,7 +187,7 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
 # Launch polybar
-exec_always --no-startup-id polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec --no-startup-id picom --backend glx --glx-no-stencil --vsync
 

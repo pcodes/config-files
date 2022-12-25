@@ -26,7 +26,7 @@ vim.api.nvim_set_keymap('', '<Space>', '<Nop>', {noremap = true, silent = true})
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.bo.tabstop = 8
+vim.bo.tabstop = 4
 vim.bo.softtabstop = 0
 vim.bo.expandtab = true
 vim.bo.shiftwidth = 4

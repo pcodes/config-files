@@ -34,4 +34,6 @@ require'lspconfig'.bashls.setup{}
 
 require'lspconfig'.jsonls.setup{}
 
+require'lspconfig'.gopls.setup{}
+
 -- require'lspconfig'.yamlls.setup{}
