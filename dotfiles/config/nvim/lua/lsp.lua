@@ -36,4 +36,14 @@ require'lspconfig'.jsonls.setup{}
 
 require'lspconfig'.gopls.setup{}
 
+require('lspconfig').yamlls.setup {
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "~/uss_enterprise/*"
+      },
+    },
+  }
+}
+
 -- require'lspconfig'.yamlls.setup{}

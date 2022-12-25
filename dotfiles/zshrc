@@ -36,6 +36,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     autoupdate
+    dnf
 )
 
 source $ZSH/oh-my-zsh.sh
