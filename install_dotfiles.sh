@@ -37,6 +37,7 @@ function create_configdir_symlinks() {
     LUA_FILES=($(ls "$SCRIPTPATH"/dotfiles/config/nvim/lua))
 
     ln -sf "$SCRIPTPATH"/dotfiles/config/nvim/init.lua ~/.config/nvim/init.lua
+    ln -sf "$SCRIPTPATH"/dotfiles/config/nvim/.luarc.json ~/.config/nvim/.luarc.json
 
     for i in "${!LUA_FILES[@]}"; do
         echo "Copying " + "${LUA_FILES[$i]}"
