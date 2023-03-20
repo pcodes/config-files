@@ -37,7 +37,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # Set initial delay 300ms,
-exec --no-startup-id xset r rate 200 35
+exec --no-startup-id xset r rate 75 35
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
@@ -102,6 +102,10 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+
+# move workspace around monitors
+# bindsym $mod+Ctrl+greater move workspace to output right
+# bindsym $mod+Ctrl+less move workspace to output left
 
 # focus the child container
 #bindsym $mod+d focus child
