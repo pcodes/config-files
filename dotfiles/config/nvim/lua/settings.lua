@@ -35,3 +35,4 @@ vim.g.smarttab = 4
 -- Color scheme
 vim.o.termguicolors = true
 vim.cmd [[colorscheme catppuccin-mocha]]
+
