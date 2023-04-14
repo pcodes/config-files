@@ -21,10 +21,12 @@ return {
     'folke/trouble.nvim',
     'mhinz/vim-signify',
     'williamboman/mason-lspconfig.nvim',
+
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-nvim-lsp',
     "hrsh7th/cmp-nvim-lsp-signature-help",
     'hrsh7th/cmp-path',
+    "folke/neodev.nvim",
     'hrsh7th/cmp-cmdline',
     'hrsh7th/nvim-cmp',
     'andersevenrud/cmp-tmux',
