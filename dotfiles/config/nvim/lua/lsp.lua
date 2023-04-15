@@ -3,7 +3,7 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
-        'lua_ls', 'gopls', 'jsonls'
+        'lua_ls', 'gopls', 'jsonls', 'yamlls'
     }
 })
 
