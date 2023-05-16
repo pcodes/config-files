@@ -200,3 +200,6 @@ exec --no-startup-id /home/patcody/.bin/start-graphical-environment.sh
 
 exec --no-startup-id feh --bg-fill --randomize $HOME/Pictures/wallpaper
 
+# Graphical authentication agent
+exec --no-startup-id lxpolkit
+

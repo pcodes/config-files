@@ -1,6 +1,6 @@
 return {
-    { 'kyazdani42/nvim-web-devicons', lazy = true },
-    { "catppuccin/nvim",              name = "catppuccin" },
+    { 'nvim-tree/nvim-web-devicons', lazy = true },
+    { "catppuccin/nvim",              name = "catppuccin", lazy = true, priority = 1000 },
     'nvim-lualine/lualine.nvim',
     { 'nvim-treesitter/nvim-treesitter',          build = ':TSUpdate' },
     'neovim/nvim-lspconfig',
@@ -18,15 +18,31 @@ return {
     'mfussenegger/nvim-dap',
     'jose-elias-alvarez/null-ls.nvim',
     'jay-babu/mason-null-ls.nvim',
+    {
+        "glepnir/lspsaga.nvim",
+        event = "LspAttach",
+        config = function()
+            require("lspsaga").setup({})
+        end,
+        dependencies = {
+            { "nvim-tree/nvim-web-devicons" },
+            --Please make sure you install markdown and markdown_inline parser
+            { "nvim-treesitter/nvim-treesitter" }
+        }
+    },
     'folke/trouble.nvim',
-    'mhinz/vim-signify',
+    {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    },
     'williamboman/mason-lspconfig.nvim',
 
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-nvim-lsp',
     "hrsh7th/cmp-nvim-lsp-signature-help",
     'hrsh7th/cmp-path',
-    "folke/neodev.nvim",
     'hrsh7th/cmp-cmdline',
     'hrsh7th/nvim-cmp',
     'andersevenrud/cmp-tmux',
@@ -41,5 +57,5 @@ return {
     "folke/which-key.nvim",
     "windwp/nvim-autopairs",
     'ray-x/go.nvim',
-    'ray-x/guihua.lua'  -- recommanded if need floating window support
+    'ray-x/guihua.lua' -- recommanded if need floating window support
 }

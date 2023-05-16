@@ -1,5 +1,4 @@
 require('telescope').setup({})
-require('telescope').setup{}
 -- telescope.load_extension('fzf')
 
 -- telescope.setup({
